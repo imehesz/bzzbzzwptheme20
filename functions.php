@@ -4,7 +4,8 @@ function bizzbuzzwptheme20_resources() {
   wp_deregister_script('jquery');
   wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"), false);
   wp_enqueue_script( 'jquery' );
-  wp_enqueue_script("mooApp", get_stylesheet_directory_uri() . "/js/app.js");
+  wp_enqueue_script("materializejs", get_stylesheet_directory_uri() . "/js/materialize.min.js");
+  wp_enqueue_script("webApp", get_stylesheet_directory_uri() . "/js/app.js");
 }
 
 add_action( 'wp_enqueue_scripts', 'bizzbuzzwptheme20_resources' );

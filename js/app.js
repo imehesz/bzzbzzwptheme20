@@ -1,3 +1,3 @@
 $(function(){
-  console.log("moo loaded...");
+  $(".button-collapse").sideNav();
 });
