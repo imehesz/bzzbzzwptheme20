@@ -1,0 +1,659 @@
+  /* GLOBAL STYLES
+     -------------------------------------------------- */
+  /* Padding below the footer and lighter body text */
+
+  body {
+    padding-bottom: 40px;
+color: #5a5a5a;
+  }
+
+
+
+  /* CUSTOMIZE THE NAVBAR
+     -------------------------------------------------- */
+
+  /* Special class on .container surrounding .navbar, used for positioning it into place. */
+  .navbar-wrapper {
+position: absolute;
+top: 0;
+right: 0;
+left: 0;
+      z-index: 20;
+  }
+
+  /* Flip around the padding for proper display in narrow viewports */
+  .navbar-wrapper .container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+
+  /* CUSTOMIZE THE CAROUSEL
+     -------------------------------------------------- */
+
+  /* Carousel base class */
+  .carousel {
+    height: 500px;
+    margin-bottom: 60px;
+  }
+
+  .carousel .carousel-inner {
+    height:500px;
+  }
+
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+    z-index: 10;
+    left: 20%;
+    right: 20%;
+    top: 200px;
+    height: 200px
+  }
+
+  /* Declare heights because of positioning of img element */
+  .carousel .item {
+    height: 500px;
+    background-color: #777;
+  }
+  .carousel-inner > .item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
+  }
+
+  .carousel-inner .featured-wrapper {
+    height:100%;
+    position:relative;
+    width:33.3%;
+    overflow:hidden;
+    float:left;  
+  }
+
+  .carousel-inner .featured-info-wrapper {
+    position:absolute;
+    bottom:0;
+    background-color:rgba(0,0,0,0.85);
+    text-align:center;
+    width:100%;
+  }
+
+
+  .carousel-inner .featured-info-wrapper h1 {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+
+  .carousel-inner .featured-info-wrapper h1 a {
+    color: orange;
+  }
+
+  @media (max-width: 990px) {
+    .carousel,
+    .carousel .carousel-inner,
+    .carousel .item {
+      height: 350px;
+    }
+
+    .carousel-inner .featured-info-wrapper h1 a {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .carousel,
+    .carousel .carousel-inner,
+    .carousel .item {
+      height: 250px;
+    }
+
+    .carousel-inner .featured-info-wrapper h1 a {
+      font-size: 10px;
+    }
+  }
+
+  /* MARKETING CONTENT
+     -------------------------------------------------- */
+
+  /* Pad the edges of the mobile views a bit */
+  .marketing {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  /* Center align the text within the three columns below the carousel */
+  .marketing .col-lg-4 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .marketing h2 {
+    font-weight: normal;
+  }
+  .marketing .col-lg-4 p {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+
+  /* Featurettes
+     ------------------------- */
+
+  .featurette-divider {
+margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  }
+
+  /* Thin out the marketing headings */
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+
+
+  /* RESPONSIVE CSS
+     -------------------------------------------------- */
+
+  @media (min-width: 768px) {
+
+    /* Remove the edge padding needed for mobile */
+    .marketing {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    /* Navbar positioning foo */
+    .navbar-wrapper {
+      margin-top: 20px;
+    }
+    .navbar-wrapper .container {
+      padding-right: 15px;
+      padding-left:  15px;
+    }
+    .navbar-wrapper .navbar {
+      padding-right: 0;
+      padding-left:  0;
+    }
+
+    /* The navbar becomes detached from the top, so we round the corners */
+    .navbar-wrapper .navbar {
+      border-radius: 4px;
+    }
+
+    /* Bump up size of carousel content */
+    .carousel-caption p {
+      margin-bottom: 20px;
+      font-size: 21px;
+      line-height: 1.4;
+    }
+
+    .featurette-heading {
+      font-size: 50px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .featurette-heading {
+      margin-top: 120px;
+    }
+  }
+
+
+/* moo */
+html{
+  min-height:100%;/* make sure it is at least as tall as the viewport */
+position:relative
+}
+
+.tag-list span a {
+  background-color: #777;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #ffffff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+body {
+height: 100%;
+        padding-top: 100px;
+        background-image: url(https://7df183b2094d4f145c8b30e63ac113ad9805fff6.googledrive.com/host/0B55OYxnBow_9VWhzZXVybk1YUlU/01.jpg);
+        -webkit-transition: background-image 0.5s ease-in-out;
+        -moz-transition: background-image 0.5s ease-in-out;
+        -ms-transition: background-image 0.5s ease-in-out;
+        -o-transition: background-image 0.5s ease-in-out;
+transition: background-image 0.5s ease-in-out;
+            z-index:1;
+}
+
+table.admin tbody tr:hover {
+  background-color: #eee;
+} 
+
+.admin .related-wrapper {
+height: 200px;
+overflow: hidden;
+          border-left: 1px solid #ddd;
+}
+
+.related-container a {
+color: orange;
+}
+
+.related-container img {
+  max-height: 150px;
+}
+
+.inner-content {
+  background-color: #fff;
+  -moz-box-shadow:    0 0 35px #000;
+  -webkit-box-shadow: 0 0 25px #000;
+  box-shadow:         0 0 25px #000;
+  z-index: 10;
+  position: relative;
+}
+
+.fog {
+  background-color: #fff;
+width: 100%;
+height: 100%;
+position: absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+
+       -khtml-opacity:.90; 
+       -moz-opacity:.90; 
+       -ms-filter:"alpha(opacity=90)";
+filter:alpha(opacity=90);
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.90);
+opacity:.90;
+}
+
+
+#frame {
+  visibility: hidden;
+  background-image: url(https://5590b350b8e8612362e86b9426c7815b2a13a98a.googledrive.com/host/0B55OYxnBow_9UG5HbW1fWGhkR2c/spiral.gif);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-repeat: no-repeat;
+  border: 1px solid #eee;
+  z-index: 2000;
+        /*
+           -webkit-transition: background-position .9s ease-in-out;
+           -moz-transition: background-position .9s ease-in-out;
+           -o-transition: background-position .9s ease-in-out;
+transition: background-position .9s ease-in-out;
+         */
+}
+
+
+
+.projector .action-line-wrapper:hover .action-line {
+display: block;
+}
+
+.projector .action-line-wrapper {
+position: absolute;
+bottom: 0;
+width: 100%;
+height: 20%;
+        z-index: 10;
+}
+
+.projector .action-line {
+display: none;
+         background-color: rgba(50,50,50,0.5);
+padding: 10px 20px;
+color: white;
+bottom: 0;
+position: absolute;
+width: 100%;
+}
+
+.projector .click-action {
+height: 100%;
+width: 50%;
+       z-index: 5;
+position: absolute;
+top: 0;
+}
+
+.projector .click-action.right {
+right:0;
+}
+
+#frame .jaws {
+  background-color: black;
+position: absolute;
+width: 0;
+height: 0;
+}
+#frame .jaws.right {
+right: 0;
+height: 100%;
+}
+#frame .jaws.top {
+top: 0;
+width: 100%;
+}
+#frame .jaws.bottom {
+bottom: 0;
+width: 100%;
+}
+#frame .jaws.left {
+left: 0;
+height: 100%;
+}
+
+.carousel {
+  margin-bottom: 30px;
+}
+
+.carousel-caption {
+  background-color: rgba(55,55,55,0.5);
+}
+
+.carousel-inner > .item > img {
+width: 100%;
+height: initial;
+}
+
+.row.feeling-lucy {
+  margin-bottom: 25px;
+}
+
+.row.random-four img.img-responsive {
+display: inline-block;
+}
+
+.random-four-img-wrapper {
+  max-height: 375px; 
+overflow: hidden;
+}
+
+.row.random-four .portfolio-item {
+height: 485px;
+overflow: hidden;
+}
+
+.row.feeling-lucy a {
+  letter-spacing: 15px;
+}
+
+nav.navbar-default {
+  font-weight: bolder;
+  font-size: 30px;
+  background-color: rgba(255,255,255,0.9);
+transition: all 0.25s;
+            -moz-transition: all 0.25s; /* Firefox 4 */
+            -webkit-transition: all 0.25s; /* Safari and Chrome */
+            -o-transition: all 0.25s; /* Opera */
+}
+
+nav.navbar-default.gigantor {
+  padding-top: 35px;
+  font-size: 42px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+color: orange;
+}
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+  color: orange;
+  border: 1px solid orange;
+  background-color: #fff;
+}
+
+h3 a {
+  font-weight: bolder;
+color: orange;
+}
+
+h3 a:hover {
+color: orange;
+       text-decoration: underline;
+}
+
+section#footer {
+  background-color: #242424;
+position: absolute;
+left:0;
+right:0;
+}
+
+.thumb-image {
+display: inline-block;
+         background-position: center center;
+         background-size: cover;
+}
+
+.thumbnail img {
+width: 100%;
+}
+
+.thumbnail img {
+display: block;
+         max-width: 100%;
+height: auto;
+        margin-right: auto;
+        margin-left: auto;
+}
+
+a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
+  border-color: orange;
+}
+
+.portfolio-item .short-description {
+  border-bottom: 1px solid rgba(255, 165, 0, 0.5);
+}
+
+/* modal stuff from flat ui and bootstrap */
+.modal-wrapper {
+  backface-visibility:hidden;
+height:auto;
+left:50%;
+     max-width:400px;
+     min-width:300px;
+position: fixed;
+top:50%;
+transform:translateX(-50%) translateY(-50%);
+          -webkit-transform:translateX(-50%) translateY(-50%);
+visibility:hidden;
+width:50%;
+      z-index:10001;
+}
+
+.modal-show {
+visibility:visible
+}
+
+.modal-overlay {
+background:none repeat scroll 0 0 rgba(0,0,0,0.8);
+height:100%;
+left:0;
+opacity:0;
+position:fixed;
+top:0;
+transition:all .2s ease 0s;
+visibility:hidden;
+width:100%;
+      z-index:10000;
+}
+
+.modal-show ~ .modal-overlay {
+opacity:1;
+visibility:visible
+}
+
+.modal-effect .modal-window {
+opacity:0;
+transform:scale(0.7);
+transition:all .3s ease 0s;
+}
+
+.modal-show.modal-effect .modal-window {
+opacity:1;
+transform:scale(1);
+}
+
+.modal-window {
+  background-color: rgb(255, 255, 255);
+border:1px solid rgba(187,189,191,0.85);
+       border-radius:5px;
+padding:2px;
+color:#333;
+}
+
+.modal-x {
+  background-image:url(https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/delete.png);
+  background-position:center center;
+  background-repeat:no-repeat;
+display:block;
+height:26px;
+opacity:.6;
+position:absolute;
+right:-27px;
+top:-25px;
+width:26px;
+cursor:pointer;
+transition:all .2s linear 0s!important;
+}
+
+.modal-x:hover {
+opacity:1;
+transition:all .2s linear 0s!important;
+}
+
+.modal-top {
+  font-size:24px!important;
+height:74px;
+       line-height:74px;
+       text-align:center;
+       border-bottom: 1px solid orange;
+}
+
+.modal-bottom button {
+  margin-top:10px;
+}
+
+.modal-window button {
+display:block;
+        font-size:.8em;
+margin:0 auto;
+}
+
+.modal-bottom {
+  background-color:#fff;
+  border-radius:0 0 5px 5px;
+padding:10px!important;
+}
+
+.modal-bottom p {
+padding:0;
+        font-size:14px!important;
+color:#999;
+      text-align:center;
+margin:0;
+padding:0;
+}
+
+.modal-button-wrapper {
+  margin-top:20px;
+}
+
+.books-book-wrapper {
+height: 500px;
+overflow: hidden;
+}
+
+.books-book-wrapper h3 {
+  font-size: 20px;
+}
+
+.books-book-image-wrapper {
+/* height: 300px; */
+overflow: hidden;
+}
+
+.navbar-logo {
+background: url(../images/bizzbuzz-logo.png) no-repeat;
+width: 109px;
+height: 125px;
+        margin-top: -20px;
+        margin-right: 20px;
+margin: 0 auto;
+}
+
+.buzz-pub-settings { }
+.buzz-pub-settings .form-control { 
+width:90px;
+display:inline-block;
+}
+
+.buzz-pub-settings .form-control.day { 
+width: 75px;
+}
+
+.buzz-pub-settings .form-control.hour,
+  .buzz-pub-settings .form-control.minute { 
+width:70px;
+  }
+
+@media (max-width: 991px) {
+  .books-book-wrapper {
+height: auto;
+overflow: initial;
+  }
+
+  .books-book-image-wrapper {
+height: auto;
+overflow: initial;
+  }
+}
+
+  /* lcp paginator */
+  ul.lcp_paginator {
+    text-align: center;
+  }
+
+  ul.lcp_paginator li {
+    display: inline-block;
+    border: 1px solid #aaa;
+    margin: 2px;
+    padding: 10px;
+    color: #aaa;
+    font-weight: bolder;
+  }
+
+  ul.lcp_paginator li:hover {
+    border: 1px solid orange;
+  }
+
+  ul.lcp_paginator li a {
+    font-weight: normal;
+    color: orange;
+  }
+
+
+
+/* google search */
+.gsc-input-box {
+  height: 30px;
+}
