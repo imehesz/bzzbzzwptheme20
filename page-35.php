@@ -26,7 +26,7 @@
               <?php if($cnt % 2 == 0) : ?>
                   <div class="row">
               <?php endif; ?>
-              <?php $the_query->the_post(); $cp = new ComicParser($post); ?>
+              <?php $the_query->the_post(); $cp = new ComicParser($post); $tags = $cp->getTags(); ?>
 
               <div class="col s6 m6">
                 <div class="card">
@@ -40,7 +40,11 @@
                     <p><h5><?php echo $cp->getTitle(); ?></h5></p>
                     <p>
                         <!-- TODO FIXME TAG TAGS -->
-                        <span class="badge blue-grey white-text"><?php echo "aaaa"; ?></span>
+                        <?php if ($tags): ?>
+                          <?php foreach($tags as $tag) : ?>
+                            <span class="badge blue-grey white-text"><?php echo $tag->name; ?></span>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
                     </p>
                     <p class="short-description"><?php echo $cp->getExcerpt(); ?></p>
                     <hr>
@@ -68,7 +72,7 @@
           <div class="col s6 m6">
             <div class="card">
               <div class="card-image col s12 m6">
-            yy    <a href="single.html"><img src="images/potauk10.jpg"></a>
+                <a href="single.html"><img src="images/potauk10.jpg"></a>
                 <p class="hide-on-med-and-up">
                   <strong><a href="single.html">Planet Of The Apes #10</a></strong>
                 </p>
