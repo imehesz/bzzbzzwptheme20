@@ -35,7 +35,7 @@
             <div class="card">
               <div class="card-content">
                 <p>
-                  <a href="#" class="waves-effect waves-light btn blue-grey">Read it</a> or <a href="#">learn about our BuzzReader</a>.
+                  <a href="#" class="waves-effect waves-light btn blue-grey" id="btn-buzz-reader">Read it</a> or <a href="#">learn about our BuzzReader</a>.
                 </p>
 
                 <p class="artist-wrapper">
@@ -148,7 +148,169 @@
       </div> <!-- .container -->
     </main>
  
+<div id="bizzbuzz-page-cache" style="display:none;"></div>
+
+<div id="projector1" class="projector" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;visibility:hidden;">
+  <canvas id="projector-overlay" width="200" height="200"></canvas> 
+  <div class="click-action left"></div>
+  <div class="click-action right"></div>
+  <div class="action-line-wrapper">
+    <div class="action-line text-center">
+      <button data-buzz-view-level="1" class="btn-change-view-level btn btn-default btn-lg pull-left">Switch to Page View</button>
+      <button data-buzz-view-level="2" class="btn-change-view-level btn btn-default btn-lg pull-left" style="display:none;">Switch to Panel View</button>
+      <button class="btn-turn-previous btn btn-default btn-lg" title="Previous"><</button>
+      <button class="btn-turn-next btn btn-default btn-lg" title="Next">></button>
+      <button class="btn-buzz-reader-close pull-right btn btn-danger btn-lg"> X </button>
+    </div>
+  </div>
+</div>
+
 <?php get_footer(); ?>
+
+<!-- buzz app init -->
+<link type="text/css" rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/buzz/css/style.css?v=<?php echo filemtime(get_template_directory() . "/buzz/css/style.css"); ?>"  media="screen,projection"/>
+<script src="<?php echo get_template_directory_uri(); ?>/buzz/js/Util.js"></script>
+<?php if ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) :?>
+  <script src="<?php echo get_template_directory_uri(); ?>/buzz/js/bizzbuzzengine.js"></script>
+<?php else: ?>
+  <script src="<?php echo get_template_directory_uri(); ?>/buzz/js/bizzbuzzengine.min.js"></script>
+<?php endif; ?>
+<script>
+  jQuery(document).ready(function($) {
+    var book = {};
+    //book.pages = JSON.parse(<?php echo json_encode($cp->getPagesForJs()); ?>);
+    book.pages = [ <?php 
+      // stitching the pages and the coordinates together
+      function coordsSticher(&$item) {
+        $item = "new Coordinate(\"" . $item . "\")";
+      }
+   
+      foreach($cp->getPages() as $page) {
+        array_walk($page["coordinates"], "coordsSticher");
+        echo "new Page(" . json_encode($page["url"]) . ",[" . implode(",", $page["coordinates"]) . "]),";
+      };?>
+    ];
+
+    // TODO would be nice to move this to its own JS
+
+    var bm = new BookManager(book);
+    var p = new Projector("projector1", bm);
+
+    var cacheIndex = 0;
+    var cachePageIndex = 0;
+    var cacheEl = $("#bizzbuzz-page-cache");
+
+    var projectorSelector = "#" + p.projectorId;
+    var $proj = $(projectorSelector);
+
+    var $coverImg = $("img.cover");
+    var $btnBuzzReader = $("#btn-buzz-reader");
+    var $btnBuzzReaderClose = $(projectorSelector + " .btn-buzz-reader-close");
+    var $btnTurnPrevious = $(projectorSelector + " .btn-turn-previous");
+    var $btnTurnNext = $(projectorSelector + " .btn-turn-next");
+    var $pageClickAction = $(projectorSelector + " .click-action");
+    var $btnChangeViewLevel = $(projectorSelector + " .btn-change-view-level");
+
+    var $modalFinish = $("#modal-finish");
+    var $modalClose = $("#modal-finish a.modal-close");
+
+    var launchReader = function() {
+      $proj.css("visibility", "visible");
+    }
+
+    $coverImg.on("click", launchReader);
+    $btnBuzzReader.on("click", launchReader);
+
+    $btnBuzzReaderClose.on("click", function(){
+      $proj.css("visibility", "hidden");
+    });
+
+    $btnTurnNext.on("click", function(){
+      if (bm.currentPageIdx != cachePageIndex) {
+        cachePageIndex = bm.currentPageIdx;
+        // triggering caching on the second page (loading 5-10)
+        // and after every 5 pages so we are technically
+        // at least 5 ahead
+        if (cachePageIndex === 2 || cachePageIndex%5 === 0) {
+          pageCache();
+        }
+      }
+
+      if (bm.getViewLevel() == bm.PAGE_VIEW && bm.isLastPage() || bm.getViewLevel() == bm.PANEL_VIEW && bm.isLastPage() && p.getPage().isLastPanel()) {
+        $modalFinish.addClass("modal-show");
+      }
+
+      p.next();
+    });
+
+    $btnTurnPrevious.on("click", function(){
+      p.prev();
+    });
+
+
+    $btnChangeViewLevel.on("click", function(e){
+      var $el = $(e.target);
+      if ($el.length) {
+        bm.setViewLevel($el.attr("data-buzz-view-level"));
+        $btnChangeViewLevel.toggle();
+        p.project();
+      }
+    });
+
+    $pageClickAction.on("click", function(e){
+      if($(e.target).hasClass("left")) {
+        $btnTurnPrevious.trigger("click");
+      }
+
+      if($(e.target).hasClass("right")) {
+        $btnTurnNext.trigger("click");
+      }
+    });
+
+    $modalClose.on("click", function(){
+      $modalFinish.removeClass("modal-show");
+      $proj.css("visibility", "hidden");
+    });
+
+    var pageCache = function(cacheSize) {
+      if (!cacheSize) cacheSize = 5;
+
+      for(var i=cacheIndex; i<cacheIndex+cacheSize; i++) {
+        var page = book.pages[i];
+        if (page && page.url) {
+          var cachedPageId = page.url.replace(/\W+/g,"");
+          // if we don't have this cached yet ...
+          if (cacheEl.length && cacheEl.find("#" + cachedPageId).length === 0 ) {
+            cacheEl.append('<img id="' + cachedPageId + '" src="' + page.url + '">');
+          }
+        }
+      }
+      cacheIndex+=cacheSize;
+    }
+
+    $(window).resize(BizzBuzzUtil.debounce(function(){
+      p.project();
+    },500));
+
+    document.addEventListener("keydown", function(e){
+      if ($proj.css("visibility") == "visible") {
+        // 37 - left, 39 - right, 32 - space
+        if(e && e.keyCode == 37) {
+          $btnTurnPrevious.trigger("click");
+        }
+
+        if(e && (e.keyCode == 39 || e.keyCode == 32)) {
+          $btnTurnNext.trigger("click");
+        }
+      }
+    });
+
+    pageCache();
+    bm.getCurrentPage(p.project, p);
+  });
+</script>
+
+
 <!-- sharing widget -->
   <script type="text/javascript">var switchTo5x=true;</script>
   <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -478,7 +640,7 @@ s.parentNode.insertBefore(rw, s);
     //book.pages = JSON.parse(<?php echo json_encode($cp->getPagesForJs()); ?>);
     book.pages = [ <?php 
       // stitching the pages and the coordinates together
-      function coordsSticher(&$item) {
+      function coordsStiche_oldr(&$item) {
         $item = "new Coordinate(\"" . $item . "\")";
       }
    
